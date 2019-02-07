@@ -40,8 +40,9 @@ def organize_movies(path):
 
 if '__main__' == __name__:
     parser = argparse.ArgumentParser()
-    parser.add_argument('path')
-    parser.add_argument("--apikey", help="increase output verbosity")
+    parser.add_argument('path', help="Full path for movies folder.")
+    parser.add_argument("--apikey", help="""You can get omdb api key from this link http://www.omdbapi.com/apikey.aspx.
+                                         Or Add OMDB_API_KEY eniroment variable.""")
     args = parser.parse_args()
 
     omdb.set_default('apikey', get_apikey())
