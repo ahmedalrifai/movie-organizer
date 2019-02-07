@@ -1,11 +1,9 @@
 import os
 import shutil
 import argparse
-
 import omdb
 
-
-omdb.set_default('apikey', '63bd66b7')
+from requests.exceptions import HTTPError
 
 
 def title_formater(title):
@@ -31,5 +29,14 @@ def organize_movies(path):
 if '__main__' == __name__:
     parser = argparse.ArgumentParser()
     parser.add_argument('path')
+    parser.add_argument("--apikey", help="increase output verbosity")
     args = parser.parse_args()
-    organize_movies(args.path)
+
+    if args.apikey:
+        omdb.set_default('apikey', args.apikey)
+    
+    try:
+        organize_movies(args.path)
+    except HTTPError as ex:
+        print("Error: Can't authorize request you must add --apikey arg or OMDB_API_KEY env var.")
+    
