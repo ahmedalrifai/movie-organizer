@@ -1,5 +1,6 @@
 import os
 import shutil
+import argparse
 
 import omdb
 
@@ -28,4 +29,7 @@ def organize_movies(path):
 
 
 if '__main__' == __name__:
-    organize_movies('')
+    parser = argparse.ArgumentParser()
+    parser.add_argument('path')
+    args = parser.parse_args()
+    organize_movies(args.path)
