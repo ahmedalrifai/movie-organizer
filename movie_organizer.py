@@ -12,6 +12,18 @@ def title_formater(title):
     return title
 
 
+def get_apikey():
+    apikey = None
+    
+    if os.environ.get('OMDB_API_KEY'):
+        apikey = os.environ.get('OMDB_API_KEY')
+    
+    if args.apikey:
+        apikey = args.apikey
+    
+    return apikey
+
+
 def organize_movies(path):
     movies = os.listdir(path)
     os.chdir(path)
@@ -32,14 +44,7 @@ if '__main__' == __name__:
     parser.add_argument("--apikey", help="increase output verbosity")
     args = parser.parse_args()
 
-    apikey = None
-    if os.environ.get('OMDB_API_KEY'):
-        apikey = os.environ.get('OMDB_API_KEY')
-    
-    if args.apikey:
-        apikey = args.apikey
-
-    omdb.set_default('apikey', apikey)
+    omdb.set_default('apikey', get_apikey())
     
     try:
         organize_movies(args.path)
