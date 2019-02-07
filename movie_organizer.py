@@ -14,7 +14,7 @@ def title_formater(title):
 
 def get_apikey():
     apikey = None
-    
+
     if os.environ.get('OMDB_API_KEY'):
         apikey = os.environ.get('OMDB_API_KEY')
     
@@ -50,4 +50,5 @@ if '__main__' == __name__:
         organize_movies(args.path)
     except HTTPError as ex:
         print("Error: Can't authorize request you must add --apikey arg or OMDB_API_KEY env var.")
-    
+    except ConnectionError as ex:
+        print('Error: you must have internet connection.')
