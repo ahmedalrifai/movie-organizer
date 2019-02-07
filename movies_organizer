@@ -4,13 +4,16 @@ import os
 import shutil
 import argparse
 import omdb
+import re
 
 from requests.exceptions import HTTPError
 
 
 def title_formater(title):
-    if '(' in title:
-        title = title[:title.index(' (')]
+    match = re.search(r"([.':\d\-_\s\w']+)([\._\s]?[\(\[]?\s?[0-9]{4}?\s?[\)\]]?)?", title)
+    title = re.sub(r'[_]', ' ', match.group(1))
+    if title.endswith('.'):
+        title = title[:len(title ) -1]
     return title
 
 
@@ -33,15 +36,15 @@ def organize_movies(path):
         if title in [str(i) for i in range(1, 11)]:
             continue
         formated_title = title_formater(title)
-
-        try:
+        print(formated_title)
+        """try:
             rating = omdb.title(formated_title)['imdb_rating']
             print(f'Moving "{formated_title}" to folder {rating[0]}')
             if not os.path.exists(rating[0]):
                 os.mkdir(rating[0])
             shutil.move(title, rating[0])
         except KeyError:
-            print(f'Can\'t find "{title}" in OMDB.')
+            print(f'Can\'t find "{title}" in OMDB.')"""
 
 
 if '__main__' == __name__:
