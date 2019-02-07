@@ -33,11 +33,15 @@ def organize_movies(path):
         if title in [str(i) for i in range(1, 11)]:
             continue
         formated_title = title_formater(title)
-        rating = omdb.title(formated_title)['imdb_rating']
-        print(f'Moving "{formated_title}" to folder {rating[0]}')
-        if not os.path.exists(rating[0]):
-            os.mkdir(rating[0])
-        shutil.move(title, rating[0])
+
+        try:
+            rating = omdb.title(formated_title)['imdb_rating']
+            print(f'Moving "{formated_title}" to folder {rating[0]}')
+            if not os.path.exists(rating[0]):
+                os.mkdir(rating[0])
+            shutil.move(title, rating[0])
+        except KeyError:
+            print(f'Can\'t find "{title}" in OMDB.')
 
 
 if '__main__' == __name__:
