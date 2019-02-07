@@ -6,11 +6,11 @@ with open("README.md", "r") as fh:
 
 setuptools.setup(
 
-    name='movie_organizer',  
+    name='movies_organizer',  
 
     version='1.0.1',
 
-    scripts=['movie_organizer'] ,
+    scripts=['movies_organizer'] ,
 
     author="Ahmed Alrifai",
 
