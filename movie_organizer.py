@@ -32,8 +32,14 @@ if '__main__' == __name__:
     parser.add_argument("--apikey", help="increase output verbosity")
     args = parser.parse_args()
 
+    apikey = None
+    if os.environ.get('OMDB_API_KEY'):
+        apikey = os.environ.get('OMDB_API_KEY')
+    
     if args.apikey:
-        omdb.set_default('apikey', args.apikey)
+        apikey = args.apikey
+
+    omdb.set_default('apikey', apikey)
     
     try:
         organize_movies(args.path)
