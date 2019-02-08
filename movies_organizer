@@ -43,7 +43,7 @@ def organize_movies(path):
                 os.mkdir(rating[0])
             shutil.move(title, rating[0])
         except KeyError:
-            print(f'Can\'t find "{title}" in OMDB.')"""
+            print(f'Can\'t find "{title}" in OMDB.')
 
 
 if '__main__' == __name__:

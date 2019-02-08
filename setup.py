@@ -8,7 +8,7 @@ setuptools.setup(
 
     name='movies_organizer',  
 
-    version='1.0.3',
+    version='1.0.4',
 
     scripts=['movies_organizer'] ,
 
